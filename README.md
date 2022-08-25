@@ -6,6 +6,8 @@ Application is created using JS, HTML and CSS. For microphone setup I've used We
 
 Calculation of the frequency of the sound from the microphone is provided using FFT and AutoCorrelation.
 
+For use with bass guitar it's recommended to use audio interface, as the microphones have trouble detecting such low frequencies.
+
 # Learn fretboard tool
 
 Learn fretboard tool is tool created to help beginner musicians with practising notes on the fretboard of their instrument.
