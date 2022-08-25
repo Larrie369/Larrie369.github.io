@@ -1,0 +1,540 @@
+html {
+    box-sizing: border-box;
+    background: #88e3ff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    font-weight: 200;
+}
+
+body {
+    margin: 0;
+    user-select: none;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.transparent {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.center {
+    padding: 70px 0;
+    text-align: center;
+}
+
+.panels {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel {
+    background: #6B0F9C;
+    box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    align-items: center;
+    /* Safari transitionend event.propertyName === flex */
+    /* Chrome + FF transitionend event.propertyName === flex-grow */
+    transition:
+        font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        background 0.2s;
+    font-size: 15px;
+    background-size: cover;
+    background-position: center;
+    flex: 1;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel1 { background-color:#7991af; }
+.panel2 { background-color:#88e3ff; }
+.panel3 { background-color:#7991af; }
+.panel4 { background-color:#88e3ff; }
+.panel5 { background-color:#7991af; }
+
+/* Flex Children */
+.panel > * {
+    margin: 0px 0px;
+    width: 100%;
+    transition: transform 0.2s;
+    flex: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.panel > *:last-child { display: none;}
+.panel.open-active > *:last-child {display: flex;}
+
+.panel p, div {
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    text-shadow: 0 0 5px #7dd1eb, 0 0 14px #487e8f;
+    font-size: 25px;
+}
+
+.panel.open {
+    font-size: 25px;
+    flex: 5;
+}
+
+.cont {
+    margin: 0px 0px;
+    width: 100%;
+    height: 650px;
+    transition: transform 0.3s;
+    display: none;
+    justify-content: center;
+}
+
+.cont.open {
+    display: flex;
+    justify-content: center;
+}
+
+/*------------------------STRINGS SETTINGS-------------------------*/
+
+.stringSettings {
+    display: none;
+}
+
+.setup, .selectInstrument {
+    padding-bottom: 2em;
+    justify-content: center;
+    align-items: center;
+}
+
+.instrumentSelectBtn {
+    width: 90px;
+    height: 90px;
+    border-radius: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: 0px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.stringSelect, .start, .stop, .fretSelect, .accidentalsSelect {
+    width: 80px;
+    height: 80px;
+    border-radius: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: 0px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.stop {
+    margin-top: 1em;
+}
+
+.stringSelect:hover, .start:hover, .instrumentSelectBtn:hover, .stop:hover, .fretSelect:hover, .accidentalsSelect:hover {
+    background-color: #a8bbd3;
+    cursor: pointer;
+}
+
+.active {
+    background-color:#67809f;
+    color: #88e3ff;
+}
+
+.currentNote {
+  margin: 30px;
+  font-size: 80px;
+}
+
+.desc {
+  font-size: 20px;
+}
+
+/*------------------------METRONOME SETTINGS-------------------------*/
+
+.metronome {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    justify-content: space-between;
+}
+
+.bpm-display {
+    width: 100%;
+    color: #88e3ff;
+    text-shadow: none;
+    padding-bottom: 1em;
+}
+
+.bpm-display .tempo {
+    font-size: 4em;
+}
+
+
+.tempo-settings {
+    display:flex;
+    justify-content: space-between;
+    padding-bottom: 1em;
+}
+
+.tempo-settings .adjust-tempo-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 40px;
+    border-radius: 0.5rem;
+    border: 1px #88e3ff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tempo-settings .adjust-tempo-btn:hover{
+    background: #88e3ff;
+}
+
+.tempo-settings .decrease-tempo {
+    line-height: 30px;
+}
+
+.tempo-settings .increase-tempo {
+    line-height: 28px;
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+    background: transparent;
+    width: 70%;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 0.5em;
+    background-color: #88e3ff;
+    cursor: pointer;
+    margin-top: -8px;
+}
+
+input[type=range]::-moz-range-thumb{
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 0.5em;
+    background-color: #88e3ff;
+    cursor: pointer;
+    border: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track{
+    width: 100%;
+    height: 1px;
+    background: #000; 
+}
+
+input[type=range]::-moz-range-track{
+    width: 100%;
+    height: 1px;
+    background: #000;
+}
+
+.start-stop {
+    width: 70px;
+    height: 50px;
+    font-size: 0.7em;
+    border-radius: 0.5rem;
+    background: #88e3ff;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.start-stop:hover {
+    background:#88e3ff;
+}
+
+.measures {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5em;
+}
+
+.measures .stepper {
+    width: 30px;
+    height: 30px;
+    border-radius: 0.5rem;
+    border: 1px #88e3ff;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 10px;
+    line-height: 30px;
+}
+
+.measures .stepper:hover {
+    background: #88e3ff;
+}
+
+.beats-per-measure-text {
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+    font-size: 0.7em;
+}
+
+/*------------------------TUNER SETTINGS-------------------------*/
+
+.notes {
+    margin: auto;
+    width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  
+  .note {
+    font-size: 90px;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    padding-right: 30px;
+    padding-left: 10px;
+  }
+  
+  .note.active {
+    color: #88e3ff;
+  }
+  
+  .notes-list {
+    font-size: 80px;
+    overflow: auto;
+    overflow: -moz-scrollbars-none;
+    white-space: nowrap;
+    -ms-overflow-style: none;
+    -webkit-mask-image: -webkit-linear-gradient(
+      left,
+      rgba(255, 255, 255, 0),
+      #fff,
+      rgba(255, 255, 255, 0)
+    );
+  }
+  
+  .notes-list::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .note {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .note span {
+    position: absolute;
+    right: 0.25em;
+    font-size: 40%;
+    font-weight: normal;
+  }
+  
+  .note-sharp {
+    top: 0.3em;
+  }
+  
+  .note-octave {
+    bottom: 0.3em;
+  }
+  
+  .frequency {
+    font-size: 32px;
+  }
+  
+  .frequency span {
+    font-size: 50%;
+    margin-left: 0.25em;
+  }
+  
+  .meter {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 50%;
+    width: 400px;
+    height: 33%;
+    margin: 0 auto 5vh auto;
+  }
+  
+  .meter-pointer {
+    width: 2px;
+    height: 100%;
+    background: #2c3e50;
+    transform: rotate(45deg);
+    transform-origin: bottom;
+    transition: transform 0.5s;
+    position: absolute;
+    right: 50%;
+  }
+  
+  .meter-dot {
+    width: 10px;
+    height: 10px;
+    background: #2c3e50;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -5px;
+    right: 50%;
+    margin-right: -4px;
+  }
+  
+  .meter-scale {
+    width: 1px;
+    height: 100%;
+    transform-origin: bottom;
+    transition: transform 0.2s;
+    box-sizing: border-box;
+    border-top: 10px solid;
+    position: absolute;
+    right: 50%;
+  }
+  
+  .meter-scale-strong {
+    width: 2px;
+    border-top-width: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .meter {
+      width: 100%;
+    }
+  
+    .notes {
+      width: 100%;
+    }
+  }
+  
+  .a4 {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+  
+  .a4 span {
+    color: #88e3ff;
+  }
+
+/*------------------------KEYBOARD SETTINGS-------------------------*/
+
+.cont4 {
+  align-items: baseline;
+}
+
+.key { 
+  position: absolute; 
+  font-weight: 100; 
+  font-size: 12px;
+  border: 1px solid rgba(32,32,32,0.2);
+  border-radius: 0px 0px 5px 5px;
+  cursor:pointer;
+  box-shadow: 0px 5px 1px rgba(32,32,32,0.2);
+  -webkit-transition: 
+    margin 0.05s ease, 
+    background-color 0.05s ease, 
+    box-shadow 0.05s ease; 
+}
+
+.key:hover { 
+  background-color: #a8bbd3;
+}
+  
+.key .label { 
+  position: absolute; 
+  bottom: 15px; 
+  text-align: center; 
+  left: 0px; 
+  right: 0px;
+  font-size: 12px;
+}
+
+.keyLabel {
+  font-weight: 900; 
+  text-shadow: 0px -1px 5px #a8bbd3; 
+  font-size: 15px;
+}
+
+.black { 
+  background-color: rgb(32,32,32); 
+  color: #ffffff; 
+  z-index: 1; 
+}
+
+.white { 
+  background-color: #eaf3ff; 
+  color: #000000; 
+  z-index: 0; 
+  text-shadow: 0px 1px 1px #a8bbd3; 
+}
+
+.keyboard-holder {
+  height: 200px;
+  margin-top: 30px; 
+  position:relative; 
+  user-select:none; 
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -o-user-select:none; 
+}
+
+.keyboardBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border: 0px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+}
+
+.keyboardBtn:hover{
+  background-color: #a8bbd3;
+}
+
+.keyboard-options, .sound-options {
+  margin-top: 20px;
+}
+
+.selectSound {
+  height: 32px;
+  border-radius: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border: 0px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.info {
+  font-size: 12px;
+}
