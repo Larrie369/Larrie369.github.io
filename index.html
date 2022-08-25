@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Musician multitool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+  <link href='style.css' rel="stylesheet">
+
+  <script src="interpreter.js"></script>
+  <script src="autocorrelation.js"></script>
+  <script src="microphone.js"></script>
+  <script src="audiosynth.js"></script>
+  <script src="playKeyboard.js"></script>
+  
+</head>
+<body>
+  <div class="overlay"></div>  
+  <div class="panels">
+    
+    <div class="panel panel1">
+      <p id="button1">Tuner</p>
+      <div class="cont cont1">
+        <div class="meter">
+          <div class="meter-dot"></div>
+          <div class="meter-pointer"></div>
+        </div>
+        <div class="notes">
+          <div class="notes-list"></div>
+          <div class="frequency"></div>
+        </div>
+        <div class="a4">A<sub>4</sub> = <span>440</span> Hz</div>
+      </div>
+    </div>
+    
+    <div class="panel panel2">
+      <p id="button2">Learn fretboard</p>
+      <div class="cont cont2">
+
+        <div>
+          <div class="selectInstrument" id="selectInstument">
+            <button class="instrumentSelectBtn" id="bassSelect">Bass</button>
+            <button class="instrumentSelectBtn" id="guitarSelect">Guitar</button>
+          </div>
+          
+          <div id="stringSettings" class="stringSettings">
+
+            <div class="setup strings" id="stringSettingsB">
+              <button class="stringSelect" value="B0">B</button>
+              <button class="stringSelect" value="E1">E</button>
+              <button class="stringSelect" value="A1">A</button>
+              <button class="stringSelect" value="D2">D</button>
+              <button class="stringSelect active" value="G2">G</button>
+            </div>
+
+            <div class="setup strings" id="stringSettingsG">
+              <button class="stringSelect active" value="E2">E</button>
+              <button class="stringSelect" value="A2">A</button>
+              <button class="stringSelect" value="D3">D</button>
+              <button class="stringSelect" value="G3">G</button>
+              <button class="stringSelect" value="B3">B</button>
+              <button class="stringSelect" value="E4">E</button>
+            </div>
+
+            <div class="setup accidentals"> 
+              <button class="accidentalsSelect active" value="sharp">♯</button>
+              <button class="accidentalsSelect" value="flat">♭</button>
+              <span style="padding-left: 1em; padding-right: 0.5em;">Fret range: </span>
+              <input type="number" id="fretMin" class="fretSelect" style="margin-right: 0.5em;" min="0" max="22" value="0" onchange="checkValueMin()">
+              <input type="number" id="fretMax" class="fretSelect" min="2" max="24" value="12" onchange="checkValueMax()">
+            </div>
+
+            <div class="setup play">
+              <button class="start" id="">Start</button>
+            </div>
+
+          </div>
+        </div>
+        
+        <div id="play" style="display: none;">
+          <span class="desc">Play:</span>
+          <div id="current" class="currentNote"></div>
+          <div id="note"></div>
+          <div id="frequency"></div>
+          <button class="stop" id="stop">Stop</button>
+        </div>
+        
+      </div>
+    </div>
+    
+    <div class="panel panel3">
+      <p id="button3">Metronome</p>
+      <div class="cont cont3">
+        
+        <div class="metronome">
+          <div class="bpm-display">
+            <span class="tempo">150</span>
+            <span class="bpm">BPM</span>
+          </div>
+          <div class="tempo-settings">
+            <div class="adjust-tempo-btn decrease-tempo">-</div>
+            <input type="range" min="20" max="300" step="1" class="slider">
+            <div class="adjust-tempo-btn increase-tempo">+</div>
+          </div>
+          <div class="measures">
+            <div class="stepper subtract-beats">-</div>
+            <div class="measure-count">4</div>
+            <div class="stepper add-beats">+</div>
+          </div>
+          <span class="beats-per-measure-text">Beats per measure</span>
+          <div class="start-stop">START</div>
+          
+        </div>
+      </div>
+    </div>
+    
+    <div class="panel panel4">
+      <p id="button4">Synth keyboard</p>
+      <div class="cont cont4">
+        <div id="keyboard-settings">
+          <div class="sound-options">
+            <span>Sound:</span>
+            <select id="sound" class="selectSound">
+              <option value="0" selected="">Keyboard</option>
+              <option value="1">Organ</option>
+              <option value="2">Acoustic Guitar</option>
+              <option value="3">EDM, bro!</option>
+            </select>
+          </div>
+          <div class="keyboard-options">
+            Range [C<span id="octave-lower">3</span>-B<span id="octave-upper">5</span>]
+            <input type="button" class="keyboardBtn" id="octave-dec" value="-">
+            <input type="button" class="keyboardBtn" id="octave-inc" value="+"><br>
+            <i class="info">(Use left/right arrows to adjust with keyboard)</i>
+          </div>
+          <div id="keyboard" class="keyboard-holder"></div> <!--calls js to create keyboard with id-->
+        </div>
+    </div>
+  </div>
+  
+  <script src="start.js"></script>
+  <script src="setup.js"></script>
+  <script src="metronome.js"></script>
+  
+</body>
+  </html>
+  
